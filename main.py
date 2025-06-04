@@ -10,7 +10,7 @@ app = FastAPI(title="LexRank Summarizer API")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Replace "*" with ["http://localhost:3000"] for stricter security
+    allow_origins=["*"],  
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -32,4 +32,5 @@ def summarize(req: SummarizeRequest):
 
     summarizer = LexRankSummarizer(embedder=embedder, stopwords=ROMANIAN_STOPWORDS)
     result_json = summarizer.summarize_to_json(req.text, compression_rate=req.compression_rate)
+    print(result_json)
     return result_json
