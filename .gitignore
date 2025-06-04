@@ -1,4 +1,28 @@
+# Python
 __pycache__/
 *.py[cod]
+*.pyo
+*.pyd
+*.pyc
+
+# Virtual environments
 venv/
+env/
+ENV/
+
+# IDEs
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+
+# dotenv
 .env
+
+# render or deployment
+build/
+dist/
