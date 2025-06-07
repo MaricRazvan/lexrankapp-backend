@@ -1,4 +1,4 @@
-import re
+import regex as re
 import snowballstemmer
 
 class TextPreprocessor:
@@ -14,7 +14,7 @@ class TextPreprocessor:
     def preprocess(self, text, stopwords):
         text = self.normalize_diacritics(text)
         # Split sentences by punctuation followed by uppercase letter
-        text = re.sub(r'([.!?])\s+([A-Z])', r'\1\n\2', text)
+        text = re.sub(r'([.!?])\s+(?=\p{Lu})', r'\1\n', text)
         raw_sentences = text.strip().split('\n')
 
         original_sentences, processed_sentences = [], []
