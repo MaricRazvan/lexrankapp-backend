@@ -1,6 +1,6 @@
 import numpy as np
 import json
-from preprocess import TextPreprocessor
+from preprocessing import TextPreprocessor
 
 class LexRankSummarizer:
     def __init__(self, embedder, stopwords, threshold=0.1, damping=0.85, max_iter=100):
