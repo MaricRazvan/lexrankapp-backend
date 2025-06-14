@@ -1,4 +1,5 @@
-import regex as re
+# Required imports
+import re
 import snowballstemmer
 
 class TextPreprocessor:
@@ -13,8 +14,13 @@ class TextPreprocessor:
 
     def preprocess(self, text, stopwords):
         text = self.normalize_diacritics(text)
-        # Split sentences by punctuation followed by uppercase letter
-        text = re.sub(r'([.!?])\s+(?=\p{Lu})', r'\1\n', text)
+
+        # First: handle sentence splits with punctuation and capital letters (includes optional quote)
+        text = re.sub(r'([.!?])(["”»]?)(\s+)(?=[A-ZĂÂÎȘȚ])', r'\1\2\n', text)
+
+        # Second: force split when a quote starts a new sentence after a period, even if punctuation is missing
+        text = re.sub(r'(\.)\s*(")(?=[A-ZĂÂÎȘȚ])', r'\1\n\2', text)
+
         raw_sentences = text.strip().split('\n')
 
         original_sentences, processed_sentences = [], []

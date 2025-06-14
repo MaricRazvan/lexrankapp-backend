@@ -43,7 +43,7 @@ class TFIDFEmbedder(AbstractEmbedder):
 
         return tfidf_matrix
 
-class RoBERTaEmbedder(AbstractEmbedder):
+class BERTEmbedder(AbstractEmbedder):
     def __init__(self, model_name="dumitrescustefan/bert-base-romanian-cased-v1"):
         self.tokenizer = AutoTokenizer.from_pretrained(model_name)
         self.model = AutoModel.from_pretrained(model_name)

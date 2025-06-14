@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 from typing import Literal
 from summarizer import LexRankSummarizer
-from embedding import TFIDFEmbedder, RoBERTaEmbedder
+from embedding import TFIDFEmbedder, BERTEmbedder
 from stopwords import ROMANIAN_STOPWORDS
 
 app = FastAPI(title="LexRank Summarizer API")
@@ -19,14 +19,14 @@ app.add_middleware(
 class SummarizeRequest(BaseModel):
     text: str = Field(..., min_length=10)
     compression_rate: float = Field(0.3, ge=0.1, le=1.0)
-    embedding_type: Literal["tfidf", "roberta"] = Field("tfidf")
+    embedding_type: Literal["tfidf", "bert"] = Field("tfidf")
 
 @app.post("/summarize")
 def summarize(req: SummarizeRequest):
     if req.embedding_type == "tfidf":
         embedder = TFIDFEmbedder()
-    elif req.embedding_type == "roberta":
-        embedder = RoBERTaEmbedder()
+    elif req.embedding_type == "bert":
+        embedder = BERTEmbedder()
     else:
         raise HTTPException(status_code=400, detail="Invalid embedding_type")
 
