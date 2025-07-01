@@ -3,7 +3,7 @@ import json
 from preprocessing import TextPreprocessor
 
 class LexRankSummarizer:
-    def __init__(self, embedder, stopwords, threshold=0.1, damping=0.85, max_iter=100):
+    def __init__(self, embedder, stopwords, threshold=0.1, damping=0.15, max_iter=100):
         self.embedder = embedder
         self.threshold = threshold
         self.damping = damping
