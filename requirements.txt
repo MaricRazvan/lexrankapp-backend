@@ -3,4 +3,4 @@ uvicorn[standard]
 transformers
 torch
 numpy
-snowballstemmer
+stanza
