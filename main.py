@@ -21,6 +21,10 @@ class SummarizeRequest(BaseModel):
     compression_rate: float = Field(0.3, ge=0.1, le=1.0)
     embedding_type: Literal["tfidf", "bert"] = Field("tfidf")
 
+@app.get("/")
+def root():
+    return {"message": "LexRank Summarizer Backend is running."}
+
 @app.post("/summarize")
 def summarize(req: SummarizeRequest):
     if req.embedding_type == "tfidf":
